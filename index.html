@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Geetangi Sharma — AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  /* ── RESET & BASE ── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ivory:#F5F0E8;
+    --ivory-dim:#EDE7D9;
+    --charcoal:#1A1814;
+    --charcoal-mid:#2E2B26;
+    --gold:#C4A45A;
+    --gold-dim:#A8893D;
+    --gold-pale:#F0E8C8;
+    --warm-gray:#7A746A;
+    --warm-gray-light:#B8B0A0;
+    --accent-teal:#2A5C58;
+    --font-serif:'Cormorant Garamond',Georgia,serif;
+    --font-mono:'DM Mono',monospace;
+    --font-sans:'Jost',sans-serif;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{
+    background:var(--charcoal);
+    color:var(--ivory);
+    font-family:var(--font-sans);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events:none;z-index:1000;opacity:.6;
+  }
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.75rem 4rem;
+    background:linear-gradient(to bottom,rgba(26,24,20,.95) 0%,transparent 100%);
+  }
+  .nav-logo{
+    font-family:var(--font-serif);font-weight:300;font-size:1.05rem;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ivory);
+    text-decoration:none;
+  }
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--warm-gray-light);text-decoration:none;
+    transition:color .3s;font-weight:400;
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--charcoal);background:var(--gold);
+    padding:.45rem 1.25rem;text-decoration:none;
+    transition:background .3s;font-weight:400;
+  }
+  .nav-cta:hover{background:var(--gold-dim)}
+
+  /* ── HERO ── */
+  #hero{
+    min-height:100vh;
+    display:grid;grid-template-columns:1fr 1fr;
+    position:relative;overflow:hidden;
+  }
+  .hero-left{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:8rem 3rem 5rem 4rem;
+    border-right:0.5px solid rgba(196,164,90,.15);
+  }
+  .hero-eyebrow{
+    font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);font-weight:300;
+    margin-bottom:2rem;
+    opacity:0;animation:fadeUp .8s .2s forwards;
+  }
+  .hero-name{
+    font-family:var(--font-serif);font-size:clamp(3.5rem,6vw,6rem);
+    font-weight:300;line-height:1.0;letter-spacing:-.01em;
+    color:var(--ivory);
+    opacity:0;animation:fadeUp .8s .4s forwards;
+  }
+  .hero-name em{font-style:italic;color:var(--gold)}
+  .hero-title{
+    font-family:var(--font-sans);font-size:.8rem;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--warm-gray-light);
+    margin-top:1.5rem;font-weight:300;
+    opacity:0;animation:fadeUp .8s .6s forwards;
+  }
+  .hero-desc{
+    max-width:420px;font-size:.95rem;color:var(--warm-gray-light);
+    margin-top:2rem;line-height:1.8;font-weight:300;
+    opacity:0;animation:fadeUp .8s .7s forwards;
+  }
+  .hero-desc strong{color:var(--ivory);font-weight:400}
+  .hero-actions{
+    display:flex;gap:1rem;margin-top:2.5rem;
+    opacity:0;animation:fadeUp .8s .9s forwards;
+  }
+  .btn-primary{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    background:var(--gold);color:var(--charcoal);
+    padding:.7rem 1.8rem;text-decoration:none;font-weight:400;
+    transition:all .3s;
+  }
+  .btn-primary:hover{background:var(--ivory);color:var(--charcoal)}
+  .btn-ghost{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    border:0.5px solid rgba(196,164,90,.5);color:var(--warm-gray-light);
+    padding:.7rem 1.8rem;text-decoration:none;font-weight:400;
+    transition:all .3s;
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .hero-right{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:8rem 4rem 5rem 3rem;
+    position:relative;
+  }
+  .hero-metrics{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:rgba(196,164,90,.1);
+    border:0.5px solid rgba(196,164,90,.12);
+    opacity:0;animation:fadeIn 1s 1s forwards;
+  }
+  .metric-cell{
+    background:var(--charcoal);
+    padding:1.75rem 1.5rem;
+    transition:background .3s;
+  }
+  .metric-cell:hover{background:var(--charcoal-mid)}
+  .metric-num{
+    font-family:var(--font-serif);font-size:2.8rem;font-weight:300;
+    color:var(--gold);line-height:1;
+  }
+  .metric-label{
+    font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--warm-gray);margin-top:.5rem;font-family:var(--font-mono);
+  }
+  .hero-currently{
+    margin-top:2rem;padding:1.5rem;
+    border-left:2px solid var(--gold);
+    background:rgba(196,164,90,.04);
+    opacity:0;animation:fadeUp .8s 1.2s forwards;
+  }
+  .currently-label{
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);margin-bottom:.6rem;
+  }
+  .currently-text{
+    font-size:.88rem;color:var(--ivory-dim);line-height:1.7;font-weight:300;
+  }
+  .currently-text strong{color:var(--ivory);font-weight:400}
+
+  /* ── DIVIDER ── */
+  .divider{
+    display:flex;align-items:center;gap:1.5rem;
+    padding:0 4rem;margin:0;
+    opacity:.4;
+  }
+  .divider-line{flex:1;height:0.5px;background:var(--gold)}
+  .divider-mark{
+    font-family:var(--font-serif);font-size:1rem;color:var(--gold);
+    font-style:italic;white-space:nowrap;
+  }
+
+  /* ── SECTION BASE ── */
+  section{padding:6rem 4rem}
+  .section-label{
+    font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);
+    margin-bottom:3rem;display:flex;align-items:center;gap:1rem;
+  }
+  .section-label::after{content:'';flex:0 0 40px;height:0.5px;background:var(--gold);opacity:.5}
+  .section-title{
+    font-family:var(--font-serif);font-size:clamp(2rem,4vw,3.2rem);
+    font-weight:300;line-height:1.15;color:var(--ivory);
+    margin-bottom:1rem;
+  }
+  .section-title em{font-style:italic;color:var(--gold)}
+
+  /* ── LUXURY AI SECTION ── */
+  #luxury-ai{background:var(--charcoal-mid);position:relative;overflow:hidden}
+  #luxury-ai::before{
+    content:'LUXE';
+    position:absolute;right:-2rem;top:50%;transform:translateY(-50%);
+    font-family:var(--font-serif);font-size:18rem;font-weight:300;
+    color:rgba(196,164,90,.03);line-height:1;pointer-events:none;
+    letter-spacing:-.05em;
+  }
+  .luxury-grid{
+    display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;
+    align-items:start;margin-top:2rem;
+  }
+  .luxury-intro{font-size:1.05rem;color:var(--warm-gray-light);line-height:1.85;font-weight:300}
+  .luxury-intro strong{color:var(--ivory);font-weight:400;display:block;margin-bottom:.5rem}
+  .luxverify-card{
+    border:0.5px solid rgba(196,164,90,.2);
+    background:rgba(196,164,90,.03);
+    padding:2.5rem;
+    position:relative;
+  }
+  .luxverify-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(to right,transparent,var(--gold),transparent);
+  }
+  .lv-eyebrow{
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);margin-bottom:1rem;
+  }
+  .lv-title{
+    font-family:var(--font-serif);font-size:1.8rem;font-weight:300;
+    color:var(--ivory);margin-bottom:.5rem;
+  }
+  .lv-title em{font-style:italic;color:var(--gold)}
+  .lv-desc{font-size:.9rem;color:var(--warm-gray-light);line-height:1.75;margin-bottom:1.5rem}
+  .lv-modules{
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;
+  }
+  .lv-module{
+    padding:.75rem 1rem;
+    background:rgba(196,164,90,.05);
+    border-left:1px solid rgba(196,164,90,.3);
+  }
+  .lv-module-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;font-family:var(--font-mono)}
+  .lv-module-text{font-size:.8rem;color:var(--warm-gray-light)}
+  .lv-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .lv-tag{
+    font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+    border:0.5px solid rgba(196,164,90,.3);color:var(--warm-gray-light);
+    padding:.2rem .65rem;font-family:var(--font-mono);
+  }
+  .wip-badge{
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--charcoal);background:var(--gold);
+    padding:.25rem .75rem;font-family:var(--font-mono);
+    margin-bottom:1rem;
+  }
+  .wip-dot{width:5px;height:5px;border-radius:50%;background:var(--charcoal);animation:pulse 1.5s infinite}
+
+  /* ── GENAI SECTION ── */
+  #genai{position:relative}
+  .genai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,164,90,.1);margin-top:3rem}
+  .genai-card{
+    background:var(--charcoal);padding:2rem 1.75rem;
+    transition:background .3s;cursor:default;
+  }
+  .genai-card:hover{background:var(--charcoal-mid)}
+  .gc-num{
+    font-family:var(--font-mono);font-size:.7rem;color:var(--gold);
+    opacity:.6;margin-bottom:1rem;letter-spacing:.1em;
+  }
+  .gc-title{
+    font-family:var(--font-serif);font-size:1.35rem;font-weight:300;
+    color:var(--ivory);margin-bottom:.75rem;line-height:1.2;
+  }
+  .gc-title em{font-style:italic;color:var(--gold)}
+  .gc-desc{font-size:.85rem;color:var(--warm-gray);line-height:1.7}
+  .gc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+  .gc-tag{
+    font-size:.62rem;letter-spacing:.12em;
+    border:0.5px solid rgba(196,164,90,.2);color:var(--warm-gray);
+    padding:.15rem .55rem;font-family:var(--font-mono);
+    text-transform:uppercase;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience{background:var(--charcoal-mid)}
+  .exp-list{display:flex;flex-direction:column;gap:0;margin-top:2rem}
+  .exp-item{
+    display:grid;grid-template-columns:180px 1fr;gap:3rem;
+    padding:2.5rem 0;
+    border-bottom:0.5px solid rgba(196,164,90,.1);
+  }
+  .exp-item:last-child{border-bottom:none}
+  .exp-date{
+    font-family:var(--font-mono);font-size:.72rem;
+    color:var(--warm-gray);letter-spacing:.1em;padding-top:.2rem;
+  }
+  .exp-company{
+    font-family:var(--font-serif);font-size:1.15rem;color:var(--gold);
+    margin-bottom:.25rem;font-weight:300;
+  }
+  .exp-role{
+    font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--warm-gray-light);margin-bottom:1rem;font-weight:400;
+  }
+  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  .exp-bullets li{
+    font-size:.88rem;color:var(--warm-gray-light);line-height:1.65;
+    display:flex;gap:.75rem;align-items:flex-start;
+  }
+  .exp-bullets li::before{content:'—';color:var(--gold);opacity:.5;flex-shrink:0;margin-top:.05rem}
+  .exp-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+  .exp-pill{
+    font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    background:rgba(196,164,90,.07);color:var(--warm-gray);
+    padding:.2rem .65rem;border:0.5px solid rgba(196,164,90,.15);
+    font-family:var(--font-mono);
+  }
+
+  /* ── PROJECTS ── */
+  #projects .projects-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:rgba(196,164,90,.08);margin-top:3rem;
+  }
+  .project-card{
+    background:var(--charcoal);padding:2.25rem 2rem;
+    transition:background .3s;text-decoration:none;display:block;
+  }
+  .project-card:hover{background:var(--charcoal-mid)}
+  .pc-type{
+    font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);margin-bottom:1rem;opacity:.8;
+  }
+  .pc-title{
+    font-family:var(--font-serif);font-size:1.4rem;font-weight:300;
+    color:var(--ivory);margin-bottom:.6rem;line-height:1.2;
+  }
+  .pc-title em{font-style:italic;color:var(--gold)}
+  .pc-metric{
+    font-family:var(--font-serif);font-size:2rem;font-weight:300;
+    color:var(--gold);margin-bottom:.5rem;line-height:1;
+  }
+  .pc-desc{font-size:.85rem;color:var(--warm-gray);line-height:1.7;margin-bottom:1rem}
+  .pc-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+  .pc-tag{
+    font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    border:0.5px solid rgba(196,164,90,.18);color:var(--warm-gray);
+    padding:.15rem .55rem;font-family:var(--font-mono);
+  }
+  .pc-arrow{
+    display:inline-block;font-size:.75rem;color:var(--gold);
+    margin-top:1rem;letter-spacing:.1em;
+    transition:transform .2s;
+  }
+  .project-card:hover .pc-arrow{transform:translateX(4px)}
+
+  /* ── SKILLS ── */
+  #skills{background:var(--charcoal-mid)}
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:rgba(196,164,90,.08);margin-top:3rem;
+  }
+  .skill-card{background:var(--charcoal);padding:1.75rem}
+  .sk-title{
+    font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);font-family:var(--font-mono);margin-bottom:1rem;
+  }
+  .sk-items{display:flex;flex-direction:column;gap:.45rem}
+  .sk-item{font-size:.85rem;color:var(--warm-gray-light);display:flex;gap:.6rem;align-items:center}
+  .sk-item::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.6;flex-shrink:0}
+
+  /* ── DIOR ALIGNMENT ── */
+  #Geetangi-fit{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--charcoal) 0%,#0e1a19 100%);
+  }
+  #Geetangi-fit::after{
+    content:'Geetangi';
+    position:absolute;right:-3rem;bottom:-3rem;
+    font-family:var(--font-serif);font-size:20rem;font-weight:300;
+    color:rgba(196,164,90,.025);line-height:1;pointer-events:none;
+  }
+  .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem}
+  .fit-intro{font-size:1.0rem;color:var(--warm-gray-light);line-height:1.85}
+  .fit-intro strong{color:var(--ivory);font-weight:400}
+  .fit-points{display:flex;flex-direction:column;gap:1rem}
+  .fit-point{
+    display:flex;gap:1.25rem;align-items:flex-start;
+    padding:1.25rem;border:0.5px solid rgba(196,164,90,.12);
+    background:rgba(196,164,90,.03);transition:background .3s;
+  }
+  .fit-point:hover{background:rgba(196,164,90,.06)}
+  .fp-icon{
+    font-family:var(--font-serif);font-size:1.4rem;color:var(--gold);
+    flex-shrink:0;line-height:1;margin-top:.1rem;font-style:italic;
+  }
+  .fp-title{font-size:.82rem;font-weight:400;color:var(--ivory);margin-bottom:.3rem;letter-spacing:.05em}
+  .fp-text{font-size:.82rem;color:var(--warm-gray);line-height:1.6}
+
+  /* ── CONTACT / FOOTER ── */
+  #contact{text-align:center;padding:6rem 4rem 4rem}
+  .contact-pre{
+    font-family:var(--font-serif);font-size:clamp(2rem,4vw,3.5rem);
+    font-weight:300;color:var(--ivory);margin-bottom:1rem;line-height:1.1;
+  }
+  .contact-pre em{font-style:italic;color:var(--gold)}
+  .contact-sub{
+    font-size:.9rem;color:var(--warm-gray);max-width:480px;
+    margin:0 auto 2.5rem;line-height:1.7;
+  }
+  .contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+  footer{
+    border-top:0.5px solid rgba(196,164,90,.1);
+    padding:1.5rem 4rem;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.7rem;color:var(--warm-gray);letter-spacing:.1em;
+    font-family:var(--font-mono);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav{padding:1.25rem 1.5rem}
+    .nav-links{display:none}
+    #hero{grid-template-columns:1fr;min-height:auto}
+    .hero-left{padding:6rem 1.5rem 2rem;border-right:none;border-bottom:0.5px solid rgba(196,164,90,.1)}
+    .hero-right{padding:2rem 1.5rem 4rem}
+    .hero-metrics{grid-template-columns:1fr 1fr}
+    .luxury-grid,.fit-grid{grid-template-columns:1fr;gap:2.5rem}
+    .genai-grid,.skills-grid{grid-template-columns:1fr}
+    #projects .projects-grid{grid-template-columns:1fr}
+    .lv-modules{grid-template-columns:1fr}
+    .exp-item{grid-template-columns:1fr;gap:1rem}
+    section{padding:4rem 1.5rem}
+    #Geetangi-fit::after{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Geetangi Sharma</a>
+  <ul class="nav-links">
+    <li><a href="#luxury-ai">Luxury AI</a></li>
+    <li><a href="#genai">Generative AI</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#geetangi-fit">Luxury & Tech</a></li>
+  </ul>
+  <a href="mailto:sharmageetangi@gmail.com" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">AI Engineer · Data Scientist · India</p>
+    <h1 class="hero-name">Geetangi<br/><em>Sharma</em></h1>
+    <p class="hero-title">Machine Learning · Generative AI · Intelligent Systems</p>
+    <p class="hero-desc">
+      Building <strong>AI systems that ship.</strong> From a production anti-hallucination chatbot serving citizens of Rajasthan to real-time ML pipelines — creating intelligence that operates at scale, in the real world.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:sharmageetangi@gmail.com?subject=LuxVerify%20%E2%80%94%20Project%20Brief" class="btn-primary">Request Project Brief</a>
+      <a href="https://github.com/geez5" class="btn-ghost" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-metrics">
+      <div class="metric-cell">
+        <div class="metric-num">&lt;3%</div>
+        <div class="metric-label">Hallucination rate · RAG pipeline</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">95%</div>
+        <div class="metric-label">Answer relevance · production chatbot</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">30+</div>
+        <div class="metric-label">FPS · real-time vision inference</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">60%</div>
+        <div class="metric-label">Manual processing time saved</div>
+      </div>
+    </div>
+    <div class="hero-currently">
+      <p class="currently-label">● Currently Building</p>
+      <p class="currently-text">
+        <strong>LuxVerify</strong> — an AI-powered luxury retail intelligence platform combining <strong>demand forecasting, counterfeit detection, clienteling personalisation, and Generative AI</strong> for premium brand protection and customer intelligence.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">AI for Luxury Retail</div><div class="divider-line"></div></div>
+
+<!-- LUXURY AI SECTION -->
+<section id="luxury-ai">
+  <p class="section-label reveal">Luxury Retail Intelligence</p>
+  <h2 class="section-title reveal">AI built for <em>the most demanding</em><br/>market in the world</h2>
+  <div class="luxury-grid">
+    <div class="reveal">
+      <p class="luxury-intro">
+        <strong>The luxury industry is data-rich and intelligence-poor.</strong>
+        Brands like Dior, Chanel, and Hermès sit on years of clienteling records, VIP purchase histories, and supply chain data — yet most decisions still rely on intuition rather than intelligence.
+      </p>
+      <br/>
+      <p class="luxury-intro">
+        I am building systems that change this — combining classical machine learning, deep learning on sequential data, unsupervised network analysis, and Generative AI into platforms designed specifically for the constraints and values of luxury retail: exclusivity, personalisation, and brand integrity.
+      </p>
+      <br/>
+      <p class="luxury-intro">
+        My work is informed by the full stack of modern AI — from XGBoost fraud classifiers to BERT fine-tuned on brand documentation, from LSTM time-series anomaly detection to LangGraph autonomous agents that sweep resale platforms for threats.
+      </p>
+    </div>
+    <div class="reveal">
+      <div class="luxverify-card">
+        <div class="wip-badge"><span class="wip-dot"></span> In Development</div>
+        <p class="lv-eyebrow">Capstone Project</p>
+        <h3 class="lv-title">Lux<em>Verify</em></h3>
+        <p class="lv-desc">
+          An end-to-end AI platform for luxury brand protection — authenticating goods from structured metadata, mapping counterfeit supply networks, and providing natural language intelligence to brand investigators.
+        </p>
+        <div class="lv-modules">
+          <div class="lv-module">
+            <div class="lv-module-title">Detection Engine</div>
+            <div class="lv-module-text">XGBoost + BERT fine-tune on listing metadata</div>
+          </div>
+          <div class="lv-module">
+            <div class="lv-module-title">Ring Detection</div>
+            <div class="lv-module-text">DBSCAN clustering on seller behaviour</div>
+          </div>
+          <div class="lv-module">
+            <div class="lv-module-title">Time-Series</div>
+            <div class="lv-module-text">LSTM price manipulation detection</div>
+          </div>
+          <div class="lv-module">
+            <div class="lv-module-title">GenAI Layer</div>
+            <div class="lv-module-text">RAG pipeline + LangGraph sweep agent</div>
+          </div>
+        </div>
+        <div class="lv-tags">
+          <span class="lv-tag">Python</span><span class="lv-tag">XGBoost</span>
+          <span class="lv-tag">BERT</span><span class="lv-tag">LangGraph</span>
+          <span class="lv-tag">FastAPI</span><span class="lv-tag">GCP</span>
+          <span class="lv-tag">FAISS</span><span class="lv-tag">PyTorch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">Generative AI & Intelligent Systems</div><div class="divider-line"></div></div>
+
+<!-- GENAI SECTION -->
+<section id="genai">
+  <p class="section-label reveal">Generative AI · LLMs · Agents</p>
+  <h2 class="section-title reveal">Intelligent systems that<br/><em>reason, retrieve, and act</em></h2>
+  <div class="genai-grid reveal">
+    <div class="genai-card">
+      <div class="gc-num">01</div>
+      <h3 class="gc-title">Anti-Hallucination<br/><em>RAG Chatbot</em></h3>
+      <p class="gc-desc">10-layer hallucination mitigation pipeline in production for the Government of Rajasthan. Hybrid Pinecone retrieval with BM25, Cohere reranking, and dual-model generation achieving &lt;3% hallucination rate at citizen scale.</p>
+      <div class="gc-tags">
+        <span class="gc-tag">Qwen-7B</span><span class="gc-tag">Qwen-72B</span>
+        <span class="gc-tag">Pinecone</span><span class="gc-tag">Cohere</span>
+        <span class="gc-tag">BM25</span><span class="gc-tag">Production</span>
+      </div>
+    </div>
+    <div class="genai-card">
+      <div class="gc-num">02</div>
+      <h3 class="gc-title">Agentic AI<br/><em>Systems</em></h3>
+      <p class="gc-desc">Building autonomous multi-step agents with LangGraph for tool use, memory, and orchestrated decision-making. Applied to luxury brand protection: agents that sweep resale platforms, classify risk, and surface intelligence without human prompting.</p>
+      <div class="gc-tags">
+        <span class="gc-tag">LangGraph</span><span class="gc-tag">LangChain</span>
+        <span class="gc-tag">Function Calling</span><span class="gc-tag">Tool Use</span>
+        <span class="gc-tag">Multi-agent</span>
+      </div>
+    </div>
+    <div class="genai-card">
+      <div class="gc-num">03</div>
+      <h3 class="gc-title">LLM Fine-tuning<br/><em>& PEFT</em></h3>
+      <p class="gc-desc">Parameter-efficient fine-tuning with LoRA and QLoRA for domain-specific language models. Applied to luxury brand documentation — teaching models to reason in the vocabulary of haute couture, supply chain, and brand authentication.</p>
+      <div class="gc-tags">
+        <span class="gc-tag">LoRA</span><span class="gc-tag">QLoRA</span>
+        <span class="gc-tag">Mistral</span><span class="gc-tag">Hugging Face</span>
+        <span class="gc-tag">PEFT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">Professional Experience</p>
+  <h2 class="section-title reveal">Built in <em>production,</em><br/>not just in notebooks</h2>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-date">Jan — Jun 2026</div>
+      <div>
+        <div class="exp-company">Government of Rajasthan, DoIT&C</div>
+        <div class="exp-role">B.Tech Intern — AI / ML</div>
+        <ul class="exp-bullets">
+          <li>Architected a production-grade RAG chatbot for citizen query resolution — 10-layer anti-hallucination pipeline achieving &lt;3% hallucination rate at government scale</li>
+          <li>Built hybrid Pinecone retrieval (semantic + BM25), Cohere reranking, and dual-model architecture: Qwen-7B retrieval, Qwen-72B generation</li>
+          <li>Deployed under the supervision of Shri Naveen Kumar (AD, DoIT&C) — real users, real accountability</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="exp-pill">Qwen-7B</span><span class="exp-pill">Qwen-72B</span>
+          <span class="exp-pill">Pinecone</span><span class="exp-pill">Cohere</span>
+          <span class="exp-pill">BM25</span><span class="exp-pill">RAG</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun — Aug 2025</div>
+      <div>
+        <div class="exp-company">Proeffico Solutions Pvt. Ltd.</div>
+        <div class="exp-role">AI Software Development Intern</div>
+        <ul class="exp-bullets">
+          <li>Deployed real-time ML pipelines for customer analytics — cut inference latency 30% via GPU-accelerated batch processing</li>
+          <li>Built scalable OCR workflows on AWS Lambda & S3, reducing manual processing time by 60%</li>
+          <li>Implemented hybrid RAG pipeline (FAISS + BM25) and deployed 3 production ML models via FastAPI and Docker on GCP</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="exp-pill">FastAPI</span><span class="exp-pill">Docker</span>
+          <span class="exp-pill">AWS Lambda</span><span class="exp-pill">GCP</span>
+          <span class="exp-pill">FAISS</span><span class="exp-pill">YOLOv8</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">Selected Work</p>
+  <h2 class="section-title reveal">Systems <em>designed to perform</em></h2>
+  <div class="projects-grid">
+    <a href="https://fourxclub.in" target="_blank" class="project-card reveal">
+      <div class="pc-type">Full Stack SaaS</div>
+      <h3 class="pc-title">Four<em>X</em>Club</h3>
+      <div class="pc-metric">500+</div>
+      <p class="pc-desc">Decoupled SaaS platform with Next.js 15 SSR/SSG + Express.js. Secure auth, Razorpay payments, automated Discord, video, and email workflows serving 500+ active users.</p>
+      <div class="pc-tags">
+        <span class="pc-tag">Next.js 15</span><span class="pc-tag">React 19</span>
+        <span class="pc-tag">PostgreSQL</span><span class="pc-tag">Prisma</span>
+      </div>
+      <div class="pc-arrow">View project →</div>
+    </a>
+    <a href="https://github.com/geez5/antihallucinationragchatbot" target="_blank" class="project-card reveal">
+      <div class="pc-type">Generative AI</div>
+      <h3 class="pc-title">Anti-Hallucination<br/><em>RAG Chatbot</em></h3>
+      <div class="pc-metric">95%+</div>
+      <p class="pc-desc">End-to-end RAG chatbot engineered to reduce LLM hallucinations via context-aware generation, semantic search, and intelligent document processing. ChromaDB + Gemini + OpenAI.</p>
+      <div class="pc-tags">
+        <span class="pc-tag">ChromaDB</span><span class="pc-tag">Gemini</span>
+        <span class="pc-tag">FastAPI</span><span class="pc-tag">NLP</span>
+      </div>
+      <div class="pc-arrow">View project →</div>
+    </a>
+    <a href="https://github.com/geez5" target="_blank" class="project-card reveal">
+      <div class="pc-type">Computer Vision · NLP</div>
+      <h3 class="pc-title">Multi-Modal OCR<br/><em>& Detection</em></h3>
+      <div class="pc-metric">30+ fps</div>
+      <p class="pc-desc">GPU-accelerated YOLOv8 detection + multi-modal OCR pipeline achieving 92% extraction accuracy. CUDA-enabled inference with PyTorch optimisation for real-time throughput.</p>
+      <div class="pc-tags">
+        <span class="pc-tag">YOLOv8</span><span class="pc-tag">CUDA</span>
+        <span class="pc-tag">PaddleOCR</span><span class="pc-tag">PyTorch</span>
+      </div>
+      <div class="pc-arrow">View project →</div>
+    </a>
+    <a href="https://github.com/geez5" target="_blank" class="project-card reveal">
+      <div class="pc-type">NLP · Classification</div>
+      <h3 class="pc-title">Fake News<br/><em>Detector</em></h3>
+      <div class="pc-metric">94%</div>
+      <p class="pc-desc">TF-IDF + logistic regression baseline rigorously evaluated against alternative classifiers on 10,000+ article corpus. Misclassification analysis surfaced domain-shift between satire and misinformation.</p>
+      <div class="pc-tags">
+        <span class="pc-tag">Scikit-learn</span><span class="pc-tag">NLTK</span>
+        <span class="pc-tag">TF-IDF</span><span class="pc-tag">NLP</span>
+      </div>
+      <div class="pc-arrow">View project →</div>
+    </a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">Technical Expertise</p>
+  <h2 class="section-title reveal">The full <em>stack,</em> end to end</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="sk-title">Machine Learning</div>
+      <div class="sk-items">
+        <div class="sk-item">PyTorch · TensorFlow · Hugging Face</div>
+        <div class="sk-item">XGBoost · LightGBM · Random Forest</div>
+        <div class="sk-item">BERT · DistilBERT · Transformers</div>
+        <div class="sk-item">LSTM · GRU · Sequence modelling</div>
+        <div class="sk-item">Scikit-learn · SHAP · Optuna</div>
+        <div class="sk-item">K-Means · DBSCAN · PCA · t-SNE</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-title">Generative AI & LLMs</div>
+      <div class="sk-items">
+        <div class="sk-item">RAG Pipelines · FAISS · Pinecone · ChromaDB</div>
+        <div class="sk-item">LangChain · LangGraph · Agents</div>
+        <div class="sk-item">LoRA · QLoRA · PEFT fine-tuning</div>
+        <div class="sk-item">Qwen · Mistral · GPT · Gemini</div>
+        <div class="sk-item">Cohere Reranking · BM25 · Hybrid search</div>
+        <div class="sk-item">Prompt engineering · Structured output</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-title">Data Science</div>
+      <div class="sk-items">
+        <div class="sk-item">Pandas · NumPy · Matplotlib · Seaborn</div>
+        <div class="sk-item">Plotly · Exploratory data analysis</div>
+        <div class="sk-item">Feature engineering · Time-series</div>
+        <div class="sk-item">Statistics · Hypothesis testing</div>
+        <div class="sk-item">SQL · PostgreSQL · Window functions</div>
+        <div class="sk-item">Jupyter · Cross-validation · Ablation</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-title">MLOps & Infrastructure</div>
+      <div class="sk-items">
+        <div class="sk-item">FastAPI · Docker · Kubernetes</div>
+        <div class="sk-item">MLflow · Experiment tracking</div>
+        <div class="sk-item">GCP · AWS Lambda & S3</div>
+        <div class="sk-item">GitHub Actions · CI/CD</div>
+        <div class="sk-item">Vercel · Railway · Render</div>
+        <div class="sk-item">REST APIs · n8n · Webhooks</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-title">Full Stack</div>
+      <div class="sk-items">
+        <div class="sk-item">Next.js · React · Express.js</div>
+        <div class="sk-item">PostgreSQL · Prisma ORM</div>
+        <div class="sk-item">Tailwind CSS · Shadcn UI</div>
+        <div class="sk-item">NextAuth v5 · Razorpay</div>
+        <div class="sk-item">REST APIs · SSR / SSG</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-title">Languages</div>
+      <div class="sk-items">
+        <div class="sk-item">Python — primary language</div>
+        <div class="sk-item">SQL — advanced querying</div>
+        <div class="sk-item">JavaScript / TypeScript</div>
+        <div class="sk-item">English — fluent (working language)</div>
+        <div class="sk-item">French — learning actively</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LUXURY TECH FIT -->
+<section id="luxury-fit">
+  <p class="section-label reveal">Where AI Meets Luxury</p>
+  <h2 class="section-title reveal">Built for the <em>most demanding</em><br/>intersection of craft and code</h2>
+  <div class="fit-grid">
+    <div class="reveal">
+      <p class="fit-intro">
+        Luxury brands are sitting on their most valuable asset — <strong>data</strong> — and most of it remains unexploited. Purchase histories, clienteling records, supply chain signals, resale market intelligence: the raw material for systems that can personalise at scale, protect brand equity, and forecast demand with precision.
+      </p>
+      <br/>
+      <p class="fit-intro">
+        I build those systems. Not as theoretical exercises — as <strong>production pipelines</strong> that serve real users, handle real data, and deliver measurable outcomes.
+      </p>
+      <br/>
+      <p class="fit-intro">
+        The luxury industry demands the same thing from its engineers that it demands from its designers: <strong>no compromise on quality, no tolerance for approximation, and an obsession with the experience on the other end.</strong>
+      </p>
+    </div>
+    <div class="fit-points reveal">
+      <div class="fit-point">
+        <div class="fp-icon">I</div>
+        <div>
+          <div class="fp-title">Generative & Agentic AI — shipped to production</div>
+          <div class="fp-text">Built and deployed a RAG chatbot with &lt;3% hallucination rate serving thousands of users. Building autonomous LangGraph agents for luxury market intelligence. The GenAI capability luxury teams are actively hiring for.</div>
+        </div>
+      </div>
+      <div class="fit-point">
+        <div class="fp-icon">II</div>
+        <div>
+          <div class="fp-title">Cloud-native ML on GCP & AWS</div>
+          <div class="fp-text">Production deployments on Google Cloud Platform and AWS. FastAPI model serving, Dockerised pipelines, cloud-native workflows — the infrastructure stack most luxury tech teams run on.</div>
+        </div>
+      </div>
+      <div class="fit-point">
+        <div class="fp-icon">III</div>
+        <div>
+          <div class="fp-title">Full DS/ML breadth — forecasting to NLP</div>
+          <div class="fp-text">Supervised learning, unsupervised clustering, time-series forecasting, BERT fine-tuning, deep learning, MLOps. The complete range luxury data teams need — from demand prediction to personalisation to fraud detection.</div>
+        </div>
+      </div>
+      <div class="fit-point">
+        <div class="fp-icon">IV</div>
+        <div>
+          <div class="fp-title">Genuine investment in the luxury domain</div>
+          <div class="fp-text">Actively building LuxVerify — an AI platform for luxury brand intelligence — because the problems in this industry are uniquely complex and uniquely high-stakes. This is not opportunistic positioning. It is where my work is pointed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="contact-pre reveal">Let's build something<br/><em>extraordinary</em></h2>
+  <p class="contact-sub reveal">Open to Data Science internship opportunities — particularly those at the intersection of AI and luxury retail. Available immediately.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:sharmageetangi@gmail.com" class="btn-primary">sharmageetangi@gmail.com</a>
+    <a href="https://github.com/geez5" class="btn-ghost" target="_blank">GitHub ↗</a>
+    <a href="tel:+917850899701" class="btn-ghost">+91 78508 99701</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Geetangi Sharma</span>
+  <span>AI Engineer · India</span>
+  <span>Available for internship · Jun 2026</span>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+  });
+},{threshold:0.12});
+reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
